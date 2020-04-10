@@ -34,11 +34,11 @@ textannotation_lasso(
 }
 \value{
 An data frame object derived from the data frame specified in
-    the 'data' parameter where the new annotations have been added to the
-    the column specified in 'y_col', a new column 'batch' has been added
-    to specify the batch at which each new document was labeled, and a new
-    column 'active' specifying whether or not a newly-labeled document was
-    sampled actively or passively (randomly).
+the 'data' parameter where the new annotations have been added to the
+the column specified in 'y_col', a new column 'batch' has been added
+to specify the batch at which each new document was labeled, and a new
+column 'active' specifying whether or not a newly-labeled document was
+sampled actively or passively (randomly).
 }
 \description{
 This function supports annotation of documents using an uncertainty sampling approach using predicted response of lasso regression as an uncertainty measure. This algorithm samples a batch of unlabeled documents with a predicted probability nearest to .5 for annotation via the R console. This function returns a data frame with annotations and their resepective batch_id and a boolean flag for whether or not the documents were sampled actively (or randomly).
