@@ -1,0 +1,19 @@
+Package: ALTA
+Title: Active Learning for Text Analysis
+Version: 0.0.0.9000
+Authors@R: person("Blake", "Miller", email = "b.a.miller@lse.ac.uk", role = c("aut", "cre", "cph"), comment = c(ORCID = "0000-0002-4707-0984")) 
+Description: ALTA provides a simple interface for document annotation using active learning. While implementing several active learning algorithms for text annotation, this package also facilitates random sampling approaches to document annotation.
+License: Creative Commons Attribution-NonCommercial (CC-By-NC)
+Encoding: UTF-8
+LazyData: TRUE
+Depends: R (>= 3.1.0)
+Imports:
+    quanteda,
+    glmnet
+URL: https://blakeapm.com
+BugReports: https://github.com/blakeapm/alta/issues
+VignetteBuilder: knitr
+Language: en-GB
+Collate:
+    'textannotation_lasso.R'
+RoxygenNote: 7.1.0
