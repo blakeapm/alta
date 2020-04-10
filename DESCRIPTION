@@ -1,4 +1,4 @@
-Package: ALTA
+Package: alta
 Title: Active Learning for Text Analysis
 Version: 0.0.0.9000
 Authors@R: person("Blake", "Miller", email = "b.a.miller@lse.ac.uk", role = c("aut", "cre", "cph"), comment = c(ORCID = "0000-0002-4707-0984")) 
