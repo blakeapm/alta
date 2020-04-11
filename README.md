@@ -6,7 +6,7 @@ Active Learning for Text Analysis. ALTA provides a simple interface for document
 
 ALTA implements many of the algorithms discussed in:
 
-*Miller, Blake, Fridolin Linder and Walter Mebane. ["Active Learning Approaches for Labeling Text: Review and Assessment of the Performance of Active Learning Approaches"](https://drive.google.com/file/d/1v2FEVjIIcVVldtk2P1WhgLkYRaaYAqVu/) Political Analysis, forthcoming. DOI: 10.1017/pan.2020.4*
+*Miller, Blake, Fridolin Linder and Walter Mebane. ["Active Learning Approaches for Labeling Text: Review and Assessment of the Performance of Active Learning Approaches"](https://drive.google.com/file/d/1v2FEVjIIcVVldtk2P1WhgLkYRaaYAqVu/), Political Analysis, forthcoming. DOI: 10.1017/pan.2020.4*
 
 ## Current and Future Functionality
 
@@ -16,11 +16,11 @@ ALTA is currently in a minimum viable product stage of development and as such m
 
 - `textannotation_random`: Random annotation. Documents are sampled for annotation randomly.
 - `textannotation_lasso`: An uncertainty sampling method using predicted probabilities from a lasso regression as a measure of uncertainty. Documents are sampled using absolute deviance of the models predicted probability from .5.
+- `textannotation_rf`: A "query by committee" method that uses the forest vote entropy from a random forest to select documents for annotation.
 
 ### Algorithms to be implemented in the future
 
 - `textannotation_svm`: An uncertainty sampling method using a support vector machine (SVM) classifier. Documents are sampled using absolute distance from a the classifier's class-separating hyperplane.
-- `textannotation_rf`: A "query by committee" method that uses the forest vote entropy from a random forest to select documents for annotation.
 
 ### Other future functionality
 
