@@ -14,7 +14,7 @@ ALTA is currently in a minimum viable product stage of development and as such m
 ### Algorithms to be implemented in the future
 
 - `textannotation_svm`: An uncertainty sampling method using a support vector machine (SVM) classifier. Documents are sampled using absolute distance from a the classifier's class-separating hyperplane.
-- `textannotation_rf`: A ``query by committee'' method that uses the forest vote entropy from a random forest to select documents for annotation.
+- `textannotation_rf`: A "query by committee" method that uses the forest vote entropy from a random forest to select documents for annotation.
 
 ### Other future functionality
 
