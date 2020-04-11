@@ -50,11 +50,19 @@ hate_speech <- read.csv('hate_speech.csv', stringsAsFactors=FALSE)
 Specify the text, id, and annotation column names. In the R console, you will be prompted to annotate documents one by one. A new augmented data frame will be assigned to `hate_speech_annotated`. This data frame will include all annotations made from console input (in the specified `y_col`) and will have new columns `batch`, and `active` which indicate the batch index at which the document was labeled and the algorithm used for document sampling: random (FALSE) or active (TRUE).
 
 ```r
-hate_speech_annotated <- textannotation_lasso(hate_speech, text_col='comment_text', y_col='obscene', doc_id_col='id')
+hate_speech_annotated <- textannotation_lasso(hate_speech, 
+                                              text_col='comment_text',
+                                              y_col='obscene',
+                                              doc_id_col='id')
 ```
 
 ALTA defaults to 10 batches and 10 documents per batch (a total of 100 documents to be labeled in each session). Larger batches help to limit the time spent fitting text models used to sample documents. If you face fewer computational resource constraints, you could reduce batch size to 1 and increase the number of batches to 100. This would also result in 100 documents labeled per session, but a new model would be fit after annotating each document.
 
 ```r
-hate_speech_annotated <- textannotation_lasso(hate_speech, text_col='comment_text', y_col='obscene', doc_id_col='id', n_batches=100, batch_size=1)
+hate_speech_annotated <- textannotation_lasso(hate_speech, 
+                                              text_col='comment_text',
+                                              y_col='obscene',
+                                              doc_id_col='id',
+                                              n_batches=100,
+                                              batch_size=1)
 ```
