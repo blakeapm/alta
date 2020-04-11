@@ -1,4 +1,4 @@
-#' Text Annotation Using Uncertainty Sampling via Lasso Regression
+#' Text Annotation Using Random Sampling
 #'
 #' This function supports annotation of documents using random sampling.
 #' @param data A dataframe with a 'text' column and 'doc_id' column.
@@ -34,8 +34,8 @@ textannotation_random <- function(data, text_col='text', y_col='y', doc_id_col='
 		text <- to_label[i,text_col]
 		message(paste(hrule, "\nDocument ID: ", id, "\n\n", "Document Text: ", "\n\n", text, hrule, sep=''))
 		while (TRUE) {
-			label <- readline(prompt=paste("\n\nEnter label for '", y_col, "' (0, 1): ", sep=""))
-			if (grepl("[0-1]", label)) {
+			label <- as.integer(readline(prompt=paste("\n\nEnter label for '", y_col, "' (0, 1): ", sep="")))
+			if (label %in% c(1,0)) {
 				break
 			} else {
 				warning("Invalid input. You must enter either 0 for false or 1 for true.")
