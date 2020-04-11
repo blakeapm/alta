@@ -2,6 +2,12 @@
 
 Active Learning for Text Analysis. ALTA provides a simple interface for document annotation using active learning. While implementing several active learning algorithms for text annotation, this package also facilitates random sampling approaches to document annotation.
 
+## Sources
+
+ALTA implements many of the algorithms discussed in:
+
+*Miller, Blake, Fridolin Linder and Walter Mebane. ["Active Learning Approaches for Labeling Text: Review and Assessment of the Performance of Active Learning Approaches"](https://drive.google.com/file/d/1v2FEVjIIcVVldtk2P1WhgLkYRaaYAqVu/) Political Analysis, forthcoming. DOI: 10.1017/pan.2020.4*
+
 ## Current and Future Functionality
 
 ALTA is currently in a minimum viable product stage of development and as such may change quite a bit over the next several weeks, so please keep track of any changes here.
