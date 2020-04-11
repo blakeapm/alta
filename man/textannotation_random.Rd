@@ -2,7 +2,7 @@
 % Please edit documentation in R/textannotation_random.R
 \name{textannotation_random}
 \alias{textannotation_random}
-\title{Text Annotation Using Uncertainty Sampling via Lasso Regression}
+\title{Text Annotation Using Random Sampling}
 \usage{
 textannotation_random(
   data,
