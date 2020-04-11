@@ -12,40 +12,50 @@ textannotation_lasso(
   n_batches = 10,
   batch_size = 10,
   rand_minority_min_n = 100,
-  active = TRUE
+  n_cores = 2
 )
 }
 \arguments{
 \item{data}{A dataframe with a 'text' column and 'doc_id' column.}
 
-\item{text_col}{A string with the name of the column containing document text. Defaults to 'text'}
+\item{text_col}{A string with the name of the column containing document 
+text. Defaults to 'text'}
 
-\item{y_col}{A string with the name of the column containing document text. Defaults to 'y'}
+\item{y_col}{A string with the name of the column containing document 
+text. Defaults to 'y'}
 
-\item{doc_id_col}{A string with the name of the column containing document ids. Defaults to 'doc_id'}
+\item{doc_id_col}{A string with the name of the column containing document
+ids. Defaults to 'doc_id'}
 
-\item{n_batches}{An integer for the number of total batches to label.}
+\item{n_batches}{An integer for the number of total batches to label.
+Defaults to 10..}
 
-\item{batch_size}{An integer for the number of documents to sample at each iteration of the active learning algorithm.}
+\item{batch_size}{An integer for the number of documents to sample at 
+each iteration of the active learning algorithm. Defaults to 10.}
 
-\item{rand_minority_min_n}{Boolean variable controlling whether new documents are selected via 'random' or 'active' sampling.}
+\item{rand_minority_min_n}{An integer for the minimum number of documents
+in the minority class needed to begin active learning. If the minority
+class has fewer observations than `rand_minority_min_n`, documents will
+be sampled randomly. Defaults to 100.}
 
-\item{active}{Boolean variable controlling whether new documents are selected via 'random' or 'active' sampling.}
+\item{n_cores}{An integer for the number of cores to use in the estimation 
+of the lasso model.}
 }
 \value{
-An data frame object derived from the data frame specified in
-the 'data' parameter where the new annotations have been added to the
-the column specified in 'y_col', a new column 'batch' has been added
-to specify the batch at which each new document was labeled, and a new
-column 'active' specifying whether or not a newly-labeled document was
-sampled actively or passively (randomly).
+A new data frame object derived from the data frame passed into
+the the 'data' argument. This new data frame includes new annotations from
+the annotation session in the column specified in the 'y_col' argument. 
+A new column 'batch' has been added to specify the batch at which each 
+new document was labeled, and a new column 'active' has been added to 
+specify  whether a newly-labeled document was sampled actively or 
+passively (randomly).
 }
 \description{
 This function supports annotation of documents using an uncertainty sampling approach using predicted response of lasso regression as an uncertainty measure. This algorithm samples a batch of unlabeled documents with a predicted probability nearest to .5 for annotation via the R console. This function returns a data frame with annotations and their resepective batch_id and a boolean flag for whether or not the documents were sampled actively (or randomly).
 }
 \examples{
-data <- read.csv('hate_speech_corpus.csv', stringsAsFactors=FALSE)
-data_annotated <- textannotation_lasso(data, text_col='comment_text', y_col='toxic', id_col='id', n_batches=100, batch_size=5)
+data <- read.csv('wikipedia_hate_speech.csv', stringsAsFactors=FALSE)
+data_annotated <- textannotation_lasso(data, text_col='comment_text', y_col='toxic', doc_id_col='id', n_batches=100, batch_size=5)
 }
 \author{
 Blake Miller
