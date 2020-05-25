@@ -115,7 +115,7 @@ sample_svm <- function(dfm, y_col, batch_size, batch_id, n_cores) {
 #' data <- read.csv('../example_data/hate_speech.csv', stringsAsFactors=FALSE)
 #' data_annotated <- active_annotator(data, text_col='comment_text', y_col='obscene', doc_id_col='id', n_batches=10, batch_size=5, method='lasso')
 #'
-active_annotator <- function(data, text_col='text', y_col='y', doc_id_col='doc_id', method='lasso', n_batches=5, batch_size=10, rand_minority_min_n=100, n_cores=NULL) {
+active_annotator <- function(data, text_col='text', y_col='y', doc_id_col='doc_id', method='lasso', n_batches=10, batch_size=10, rand_minority_min_n=100, n_cores=NULL) {
 	if (is.null(n_cores)) {
 		n_cores <- detectCores()
 		if (is.null(n_cores)) {
