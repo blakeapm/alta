@@ -16,9 +16,8 @@
 #' @export
 #' @examples
 #' data <- read.csv('hate_speech.csv', stringsAsFactors=FALSE)
-#' data_annotated <- textannotation_random(data, text_col='comment_text', y_col='toxic', doc_id_col='id', n_docs=100)
-
-textannotation_random <- function(data, text_col='text', y_col='y', doc_id_col='doc_id', n_docs=100) {
+#' data_annotated <- random_annotator(data, text_col='comment_text', y_col='toxic', doc_id_col='id', n_docs=100)
+random_annotator <- function(data, text_col='text', y_col='y', doc_id_col='doc_id', n_docs=100) {
 	if (!y_col %in% names(data)) {
 		warning(paste("No existing y column found in corpus data frame. Creating new column: '", y_col, "\'", sep=""))
 		data[y_col] <- NA

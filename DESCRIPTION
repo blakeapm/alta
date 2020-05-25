@@ -11,13 +11,14 @@ Imports:
     quanteda,
     glmnet,
     doMC,
-    ranger
+    ranger,
+    e1071,
+    foreach
 URL: https://blakeapm.com
 BugReports: https://github.com/blakeapm/alta/issues
 VignetteBuilder: knitr
 Language: en-GB
 Collate:
-    'textannotation_lasso.R'
-    'textannotation_rf.R'
-    'textannotation_random.R'
+    'random_annotator.R'
+    'active_annotator.R'
 RoxygenNote: 7.1.0
