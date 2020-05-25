@@ -11,8 +11,8 @@ ALTA implements many of the algorithms discussed in:
 ### Text annotation algorithms
 
 - `random_annotator`: Random annotation. Documents are sampled for annotation randomly.
-- `active_annotator(..., method='lasso')`: An uncertainty sampling method using predicted probabilities from a lasso regression as a measure of uncertainty. Documents are sampled using absolute deviance of the models predicted probability from .5.
-- `active_annotator(..., method='rf')`: A "query by committee" method that uses the forest vote entropy from a random forest to select documents for annotation.
+- `active_annotator(..., method='lasso')`: An uncertainty sampling method using predicted probabilities from a lasso regression as a measure of uncertainty. This method selects a batch of documents with predicted probability of class membership closest to .5.
+- `active_annotator(..., method='rf')`: A "query by committee" method that uses the forest vote entropy from a random forest to select a batch of documents for annotation.
 - `active_annotator(..., method='svm')`: An uncertainty sampling method using a support vector machine (SVM) classifier. Documents are sampled using absolute distance from a the classifier's class-separating hyperplane.
 
 ### Future functionality (TODO)
