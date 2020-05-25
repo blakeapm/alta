@@ -10,14 +10,24 @@ sample_rf <- function(dfm, y_col, batch_size, batch_id, n_cores) {
 	} else {
 		message("\nRetraining random forests model...\n")
 	}
-	mod <- ranger(
-		x = x_l, 
-		y = docvars(x_l, y_col), 
-		num.trees = 500,
-		mtry = floor(sqrt(dim(x_l)[2])),
-		classification = TRUE,
-		num.threads = n_cores
-	)
+	if (is.null(n_cores)) {
+		mod <- ranger(
+			x = x_l, 
+			y = docvars(x_l, y_col), 
+			num.trees = 500,
+			mtry = floor(sqrt(dim(x_l)[2])),
+			classification = TRUE,
+		)
+	} else {
+		mod <- ranger(
+			x = x_l, 
+			y = docvars(x_l, y_col), 
+			num.trees = 500,
+			mtry = floor(sqrt(dim(x_l)[2])),
+			classification = TRUE,
+			num.threads = n_cores
+		)
+	}
 	pred <- predict(mod, x_u, predict.all=TRUE)
 	pred <- apply(pred$predictions, 1, calc_entropy)
 	sorted <- sort(pred, decreasing=TRUE, index.return=TRUE)
@@ -32,7 +42,11 @@ sample_lasso <- function(dfm, y_col, batch_size, batch_id, n_cores) {
 	} else {
 		message("\nRetraining lasso model...\n")
 	}
-	registerDoMC(cores=n_cores)
+	if (is.null(n_cores)) {
+		registerDoMC(cores=n_cores)
+	} else {
+		registerDoMC()
+	}
 	mod <- cv.glmnet(x_l, docvars(x_l, y_col), family="binomial", alpha=1, nfolds=5, parallel=TRUE, intercept=TRUE)
 	pred <- predict(mod, x_u, s="lambda.1se", type="response")
 	sorted <- sort(abs(pred - .5), decreasing=FALSE, index.return=TRUE)
@@ -50,7 +64,11 @@ sample_svm <- function(dfm, y_col, batch_size, batch_id, n_cores) {
 	y_l <- factor(docvars(x_l, y_col))
 	# Tune C
 	message("Tuning C using 5-fold cross-validation...\n")
-	registerDoMC(cores=n_cores)
+	if (is.null(n_cores)) {
+		registerDoMC(cores=n_cores)
+	} else {
+		registerDoMC()
+	}
 	folds <- sample(1:5, nrow(x_l), replace=TRUE)
 	Cs <- c(0.01, 0.05, 0.1, 0.5, 1, 5, 10, 50, 100, 500)
 	perf <- foreach(i = 1:10) %dopar% {
@@ -116,12 +134,6 @@ sample_svm <- function(dfm, y_col, batch_size, batch_id, n_cores) {
 #' data_annotated <- active_annotator(data, text_col='comment_text', y_col='obscene', doc_id_col='id', n_batches=10, batch_size=5, method='lasso')
 #'
 active_annotator <- function(data, text_col='text', y_col='y', doc_id_col='doc_id', method='lasso', n_batches=10, batch_size=10, rand_minority_min_n=100, n_cores=NULL) {
-	if (is.null(n_cores)) {
-		n_cores <- detectCores()
-		if (is.null(n_cores)) {
-			n_cores <- 2
-		}
-	}
 	if (!y_col %in% names(data)) {
 		warning(paste("No existing y column found in corpus data frame. Creating new column: '", y_col, "\'", sep=""))
 		data[y_col] <- NA
