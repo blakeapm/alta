@@ -6,11 +6,12 @@
 \usage{
 active_annotator(
   data,
+  dfm = NULL,
   text_col = "text",
   y_col = "y",
   doc_id_col = "doc_id",
   method = "lasso",
-  n_batches = 5,
+  n_batches = 10,
   batch_size = 10,
   rand_minority_min_n = 100,
   n_cores = NULL

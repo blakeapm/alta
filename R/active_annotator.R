@@ -133,7 +133,7 @@ sample_svm <- function(dfm, y_col, batch_size, batch_id, n_cores) {
 #' data <- read.csv('../example_data/hate_speech.csv', stringsAsFactors=FALSE)
 #' data_annotated <- active_annotator(data, text_col='comment_text', y_col='obscene', doc_id_col='id', n_batches=10, batch_size=5, method='lasso')
 #'
-active_annotator <- function(data, text_col='text', y_col='y', doc_id_col='doc_id', method='lasso', n_batches=10, batch_size=10, rand_minority_min_n=100, n_cores=NULL) {
+active_annotator <- function(data, dfm=NULL, text_col='text', y_col='y', doc_id_col='doc_id', method='lasso', n_batches=10, batch_size=10, rand_minority_min_n=100, n_cores=NULL) {
 	if (!y_col %in% names(data)) {
 		warning(paste("No existing y column found in corpus data frame. Creating new column: '", y_col, "\'", sep=""))
 		data[y_col] <- NA
@@ -152,9 +152,11 @@ active_annotator <- function(data, text_col='text', y_col='y', doc_id_col='doc_i
 	}
 	for (i in 1:n_batches) {
 		batch_id <- batch_id + 1
-		cor <- corpus(data, text_field='comment_text')
-		dfm <- dfm(cor, remove=stopwords("english"), verbose=TRUE)
-		dfm <- dfm_trim(dfm, min_docfreq = 2, verbose=TRUE)
+		if (is.null(dfm)) {		
+			cor <- corpus(data, text_field=text_col)
+			dfm <- dfm(cor, remove=stopwords("english"), verbose=TRUE)
+			dfm <- dfm_trim(dfm, min_docfreq = 2, verbose=TRUE)
+		}
 		labeled <- data[which(!is.na(data[y_col])),]
 		unlabeled <- data[which(is.na(data[y_col])),]
 		message(paste("\nStarting batch ", i, "/", n_batches, "...\n\nTotal labeled docs: ", nrow(labeled), "/", nrow(data), "\n", sep=""))
